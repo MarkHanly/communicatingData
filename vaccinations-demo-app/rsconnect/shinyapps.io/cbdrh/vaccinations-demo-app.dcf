@@ -1,0 +1,12 @@
+name: vaccinations-demo-app
+title: vaccinations-demo-app
+username:
+account: cbdrh
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3719503
+bundleId: 4288644
+url: https://cbdrh.shinyapps.io/vaccinations-demo-app/
+when: 1614658953.86685
+asMultiple: FALSE
+asStatic: FALSE

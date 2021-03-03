@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Communicating Data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="   Mark Hanly" />
+    <meta name="date" content="2021-03-04" />
+    <link href="libs/tile-view-0.2.5.9000/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.5.9000/tile-view.js"></script>
+    <script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-1.3.1/leaflet.js"></script>
+    <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+    <script src="libs/proj4-2.6.2/proj4.min.js"></script>
+    <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding-2.0.4.1/leaflet.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Communicating Data
+## <em>NDARC HDR learning &amp; development webinar</em>
+### <br><br> Mark Hanly
+### Centre for Big Data Research in Health
+### 4 March 2021
+
+---
+
+name: introductions
+class: centre 
+
+
+
+
+&lt;!-- Visible slides start here --&gt;
+
+# Introductions
+
+.pull-left[
+  ## About me
+
+- PhD
+- CBDRH
+# 🇮🇪
+
+]
+
+--
+
+.pull-right[
+
+## About you (maybe?)
+- MSc or PhD
+- Quantitative 
+- Health-orientated
+- Coder
+  - SAS/Stata/R/Python/SPSS
+- Beginner -&gt; Experienced
+
+]
+
+---
+name: communicating-data
+class: inverse, middle, center
+
+# Data preparation accounts for about 80% of a data scientists* work
+
+.right[*statistician/biostatistician/researcher]
+
+---
+name: communicating-data1
+class: middle, center
+
+## 80% data cleaning, 20% data analysis?
+
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+name: communicating-data2
+class: middle, center
+
+## The lifecycle of a research project is a little different
+
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+name: communicating-data2
+class: top, center
+
+## The dissmenation stage is indefinite
+### For example...
+
+--
+
+![](images/mass-vac-google-scholar.png)
+
+
+---
+class: center, middle, inverse
+
+# The way we consume information has evolved rapidly 
+
+
+---
+class: left
+
+.pull-left[
+## The old model
+
+- Hardcopy
+- Slower
+- Disconnected
+
+]
+
+.pull-right[
+&lt;iframe src="https://giphy.com/embed/i45Wufh14ggPMgSvrC" width="480" height="347" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href="https://giphy.com/gifs/usnationalarchives-books-reading-library-i45Wufh14ggPMgSvrC"&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+]
+
+---
+class: left
+
+.pull-left[
+## The new model
+
+- Online
+- High velocity
+- Hyper-connected
+
+]
+
+.pull-right[
+&lt;iframe src="https://giphy.com/embed/9rtpurjbqiqZXbBBet" width="474" height="480" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;&lt;p&gt;&lt;a href="https://giphy.com/gifs/9rtpurjbqiqZXbBBet"&gt;via GIPHY&lt;/a&gt;&lt;/p&gt;
+]
+
+
+---
+class: center, middle, inverse
+
+# The way we communicate data hasn't changed! 
+
+
+---
+class: center, top
+
+## Can you see what is wrong with this plot?
+
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+--
+# 🤷
+
+
+---
+class: center, top
+
+## Here's the original
+
+&lt;img src="images/drunk-rats.png" width="850" /&gt;
+
+--
+
+.right[[🔗 Stewart CC. American Journal of Physiology, Vol 1(1) January 1898](https://doi.org/10.1152/ajplegacy.1898.1.1.40)] 
+
+
+---
+class: inverse, center, middle
+
+# In 120 years we have added colour! 🚀
+
+--
+(Although the journal charges extra)
+
+
+
+---
+class: center, top
+
+### The basic anatomy of a table hasn't changed since Newton's time
+
+.pull-left[
+&lt;img src="images/old-table.png" width="350" /&gt;
+]
+
+.pull-right[
+
+🔗 [A Table of the Apertures of Object-Glasses. The Philosophical Transactions of the Royal Society, Vol 1(4) June 1665](https://en.wikisource.org/wiki/Philosophical_Transactions/Volume_1/Number_4)
+
+&gt;he intends to give the reason and demonstration in his Diopticks, which he is now writing, and intends to finish, as soon as his Health will permit.
+
+]
+
+
+
+---
+name: outline
+class: left, top
+
+# Outline
+
+.pull-left[
+  ## What I plan to cover
+  
+The things you might present ⛵
+- Graphs
+- Tables
+  
+The medium 🏝  
+- Workflow
+- Distribution platforms
+  
+]
+
+--
+
+.pull-right[
+
+## What I won't cover
+Other things relevant to data communication
+- Delivering presentations 
+- Engaging with policy-makers
+- What to actually write/plot
+
+]
+
+
+
+---
+class: center, bottom, title-slide
+background-image: url("images/sailboat.jpg")
+background-size: contain
+
+.left[
+
+# Figures and tables
+
+]
+
+
+
+---
+name: figures-quote
+class: inverse, centre, middle
+
+# Figure quality is a paper’s suit and tie.
+
+.right[&amp;mdash; American Journal Experts (AJE) Report]
+
+
+---
+name: visualise-data
+
+# A picture is worth 1000 words
+
+## (or maybe 100 summary statistics)
+
+--
+
+
+
+.pull-left[
+
+
+```r
+head(df, n=10)
+```
+
+]
+
+.pull-right[
+
+
+```
+# A tibble: 10 x 2
+       x     y
+   &lt;dbl&gt; &lt;dbl&gt;
+ 1  55.4  97.2
+ 2  51.5  96.0
+ 3  46.2  94.5
+ 4  42.8  91.4
+ 5  40.8  88.3
+ 6  38.7  84.9
+ 7  35.6  79.9
+ 8  33.1  77.6
+ 9  29.0  74.5
+10  26.2  71.4
+```
+
+]
+
+
+---
+
+# A picture is worth 1000 words
+## (or maybe 100 summary statistics)
+
+
+.pull-left[
+
+
+```r
+summary(df)
+
+cor(df)
+```
+
+]
+
+.pull-right[
+
+
+```
+       x               y         
+ Min.   :22.31   Min.   : 2.949  
+ 1st Qu.:44.10   1st Qu.:25.288  
+ Median :53.33   Median :46.026  
+ Mean   :54.26   Mean   :47.832  
+ 3rd Qu.:64.74   3rd Qu.:68.526  
+ Max.   :98.21   Max.   :99.487  
+```
+
+```
+            x           y
+x  1.00000000 -0.06447185
+y -0.06447185  1.00000000
+```
+
+]
+
+
+---
+
+# A picture is worth 1000 words
+## (or maybe 100 summary statistics)
+
+
+.pull-left[
+
+
+```r
+plot(df)
+```
+
+]
+
+
+--
+
+.pull-right[
+
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+]
+
+
+---
+class: center, bottom, chapter-title 
+background-image: url("images/chart-types-choosing-the-right-one.png")
+background-size: contain
+
+.right[🔗 [www.ExtremePresentation.com](www.ExtremePresentation.com)]
+
+
+---
+class: center, middle, inverse
+
+# The Grammer of Graphics
+
+## A foundation to make _every_ type of graph
+
+
+---
+class: left 
+
+## The Grammer of Graphics
+
+.pull-left[
+
+### Key components
+**Data** The variables to plot
+
+**Geom** The geometric shapes e.g. points/circles/lines/bars 
+
+**Aesthetics** Appearance of the Geoms e.g. colour/fill/opacity 
+
+**Coordinates** The scale of the axes e.g. cartesian/logistic/polar 
+
+]
+
+.pull-right[
+
+![](images/grammer-of-graphics.png)
+
+#### Implemented in the R package `ggplot2`
+
+&lt;img src="images/hex-ggplot2.png" width="80" style="display: block; margin: auto;" /&gt;
+]
+
+.right[🔗 [`ggplot2` cheatsheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)]
+
+
+
+
+---
+
+## Versatility of `ggplot2` (Data and coordinate system)
+.pull-left[
+
+```r
+basePlot &lt;- ggplot(data = iris, 
+                   aes(x = Sepal.Length))
+
+basePlot
+```
+]
+
+.pull-right[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Versatility of `ggplot2` (Density plot)
+.pull-left[
+
+```r
+basePlot &lt;- ggplot(data = iris, 
+                   aes(x = Sepal.Length))
+
+basePlot + 
+* geom_density()
+```
+]
+
+.pull-right[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+## Versatility of `ggplot2` (Histogram)
+.pull-left[
+
+```r
+basePlot &lt;- ggplot(data = iris, 
+                   aes(x = Sepal.Length))
+
+basePlot + 
+* geom_histogram()
+```
+]
+
+.pull-right[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+## Versatility of `ggplot2` (Dot plot)
+.pull-left[
+
+```r
+basePlot &lt;- ggplot(data = iris, 
+                   aes(x = Sepal.Length))
+
+basePlot + 
+* geom_dotplot()
+```
+]
+
+.pull-right[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+]
+
+
+---
+class: large-text, left, top
+
+## Tips for visualisation
+
+--
+- Label x and y axis appropriately (including units of measurement where relevant)
+
+--
+- Vary aesthetic elements to aid comparison 
+    - Color
+    - Size 
+    - Line type
+
+--
+- Arrange geometric elements to aid comparison 
+    - Ranking 
+    - Faceting (multi-panel plots)
+    - Line type
+
+--
+- Include narrative
+    - Title
+    - Caption
+    - Annotations    
+    
+    
+---
+class: left, top
+
+.left-column[
+## A worked example
+Start with a basic bar chart
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+]
+
+---
+class: left, top
+
+.left-column[
+## A worked example
+The country labels are a bit squished, let's flip the axes
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+]
+
+
+---
+class: left, top
+
+.left-column[
+## A worked example
+Ordering the bars by size rather than alphabetically makes it easier to compare
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+]
+
+---
+class: left, top
+
+.left-column[
+## A worked example
+Let's give some proper axes titles, because we're not total reprobates
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+]
+
+---
+class: left, top
+
+.left-column[
+## A worked example
+That's better, but it's still a bit hard to read the numbers on the x-axis. Let's change the labels to millions
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+]
+
+---
+class: left, top
+
+.left-column[
+## A worked example
+We can map aesthetic features of the bars to the data. For example we can map the fill colour to the number of vaccinations...
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+]
+
+
+---
+class: left, top
+
+.left-column[
+## A worked example
+...or we could map the fill colour to the discrete countries
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+]
+
+---
+class: left, top
+
+.left-column[
+## A worked example
+Because the countries are labelled already, we can drop the legend
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+]
+
+---
+class: left, top
+
+.left-column[
+## A worked example
+Finally, let's add some narration with a title and legend
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+]
+
+
+---
+class: left, top
+
+.left-column[
+## A worked example
+Finally, let's add some narration with a title and legend
+]
+
+.right-column[
+![](2021-03-04-communicating-data_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
+]
+
+
+
+---
+name: flipbook-demo2
+
+
+
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+*dailyVac %&gt;%
+* filter(location %in% ctryList) %&gt;%
+* group_by(location) %&gt;%
+* select(location, daily_vaccinations_per_million, date) %&gt;%
+* mutate(label = if_else(date == max(date),
+*                        as.character(location),
+*                        NA_character_))
+```
+]
+ 
+.panel2-timeVac-user[
+
+```
+# A tibble: 516 x 4
+# Groups:   location [9]
+   location  daily_vaccinations_per_million date       label
+   &lt;chr&gt;                              &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt;
+ 1 Argentina                             NA 2020-12-29 &lt;NA&gt; 
+ 2 Argentina                            346 2020-12-30 &lt;NA&gt; 
+ 3 Argentina                            346 2020-12-31 &lt;NA&gt; 
+ 4 Argentina                            245 2021-01-01 &lt;NA&gt; 
+ 5 Argentina                            194 2021-01-02 &lt;NA&gt; 
+ 6 Argentina                            164 2021-01-03 &lt;NA&gt; 
+ 7 Argentina                            143 2021-01-04 &lt;NA&gt; 
+ 8 Argentina                            177 2021-01-05 &lt;NA&gt; 
+ 9 Argentina                            181 2021-01-06 &lt;NA&gt; 
+10 Argentina                            185 2021-01-07 &lt;NA&gt; 
+# … with 506 more rows
+```
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+* ggplot()
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_02_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+* aes(x = date)
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_03_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+* aes(y = daily_vaccinations_per_million)
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_04_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+* geom_line() +
+* aes(group = location)
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_05_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+  geom_line() +
+  aes(group = location) +
+* aes(color = location)
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_06_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+  geom_line() +
+  aes(group = location) +
+  aes(color = location) +
+* scale_x_date("Date")
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_07_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+  geom_line() +
+  aes(group = location) +
+  aes(color = location) +
+  scale_x_date("Date") +
+* scale_y_continuous("Total vaccinations")
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_08_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+  geom_line() +
+  aes(group = location) +
+  aes(color = location) +
+  scale_x_date("Date") +
+  scale_y_continuous("Total vaccinations") +
+* scale_y_continuous("Total vaccinations (millions)", label = seq(0,80,20))
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_09_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+  geom_line() +
+  aes(group = location) +
+  aes(color = location) +
+  scale_x_date("Date") +
+  scale_y_continuous("Total vaccinations") +
+  scale_y_continuous("Total vaccinations (millions)", label = seq(0,80,20)) +
+* theme(legend.position = 'none')
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_10_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+  geom_line() +
+  aes(group = location) +
+  aes(color = location) +
+  scale_x_date("Date") +
+  scale_y_continuous("Total vaccinations") +
+  scale_y_continuous("Total vaccinations (millions)", label = seq(0,80,20)) +
+  theme(legend.position = 'none') +
+* labs(title = "Number of Covid-19 vaccinatations administered")
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_11_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+  geom_line() +
+  aes(group = location) +
+  aes(color = location) +
+  scale_x_date("Date") +
+  scale_y_continuous("Total vaccinations") +
+  scale_y_continuous("Total vaccinations (millions)", label = seq(0,80,20)) +
+  theme(legend.position = 'none') +
+  labs(title = "Number of Covid-19 vaccinatations administered") +
+* labs(caption = "Source: ourworldindata.org")
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_12_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+  geom_line() +
+  aes(group = location) +
+  aes(color = location) +
+  scale_x_date("Date") +
+  scale_y_continuous("Total vaccinations") +
+  scale_y_continuous("Total vaccinations (millions)", label = seq(0,80,20)) +
+  theme(legend.position = 'none') +
+  labs(title = "Number of Covid-19 vaccinatations administered") +
+  labs(caption = "Source: ourworldindata.org") +
+* geom_text_repel(aes(label = label))
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_13_output-1.png)&lt;!-- --&gt;
+]
+
+---
+count: false
+ 
+
+.panel1-timeVac-user[
+
+```r
+dailyVac %&gt;%
+  filter(location %in% ctryList) %&gt;%
+  group_by(location) %&gt;%
+  select(location, daily_vaccinations_per_million, date) %&gt;%
+  mutate(label = if_else(date == max(date),
+                         as.character(location),
+                         NA_character_)) %&gt;%
+  ggplot() +
+  aes(x = date) +
+  aes(y = daily_vaccinations_per_million) +
+  geom_line() +
+  aes(group = location) +
+  aes(color = location) +
+  scale_x_date("Date") +
+  scale_y_continuous("Total vaccinations") +
+  scale_y_continuous("Total vaccinations (millions)", label = seq(0,80,20)) +
+  theme(legend.position = 'none') +
+  labs(title = "Number of Covid-19 vaccinatations administered") +
+  labs(caption = "Source: ourworldindata.org") +
+  geom_text_repel(aes(label = label)) +
+* scale_y_log10()
+```
+]
+ 
+.panel2-timeVac-user[
+![](2021-03-04-communicating-data_files/figure-html/timeVac_user_14_output-1.png)&lt;!-- --&gt;
+]
+
+&lt;style&gt;
+.panel1-timeVac-user {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-timeVac-user {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-timeVac-user {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+---
+name: leaflet
+class: center, top
+
+## Interactive maps with 'leaflet'
+
+.right[[🔗 leaflet for R](https://rstudio.github.io/leaflet/)]
+
+<div id="htmlwidget-be34d6690b611a3bc812" style="width:650px;height:350px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-be34d6690b611a3bc812">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[-33.9181724300835,-33.905902691848],[151.236355901519,151.235457576379],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["CBDRH","NDARC"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-33.9181724300835,-33.905902691848],"lng":[151.235457576379,151.236355901519]},"setView":[[-33.912569,151.235464],14,[]]},"evals":[],"jsHooks":[]}</script>
+
+
+---
+name: ggiraph
+class: center, top
+
+## Interactive plots with `ggiraph`
+
+
+
+&lt;iframe src="widgets/ggiraph.html" width = "800" height = "500" scrolling="no" seamless="seamless" frameBorder="0"&gt;&lt;/iframe&gt;
+
+
+
+---
+name: plotly
+class: center, top
+
+## Interactive plots with `plotly`
+
+
+
+&lt;iframe src="widgets/plotly.html" width = "800" height = "500" scrolling="no" seamless="seamless" frameBorder="0"&gt;&lt;/iframe&gt;
+
+
+---
+name: animate
+class: center, top
+
+## Animated plots with `gganimate`
+
+&lt;!-- # Create the animation --&gt;
+&lt;!-- anim &lt;- dailyVac %&gt;%  --&gt;
+&lt;!--   filter(location %in% ctryList) %&gt;%  --&gt;
+&lt;!--   group_by(location) %&gt;%  --&gt;
+&lt;!--   select(location, daily_vaccinations_per_million, date) %&gt;%   --&gt;
+&lt;!--   ggplot(aes(x = date, y = daily_vaccinations_per_million, color = location)) +   --&gt;
+&lt;!--   geom_point(alpha = 0.3) + --&gt;
+&lt;!--   geom_line() + --&gt;
+&lt;!--   scale_x_date("Date") +   --&gt;
+&lt;!--   scale_y_continuous("Total vaccinations per million pop") +  --&gt;
+&lt;!--   scale_color_discrete(name = 'Country') + --&gt;
+&lt;!--   labs(title = "Number of Covid-19 vaccinatations administered") +   --&gt;
+&lt;!--   labs(title = 'Percent of population vaccinated with two doses', --&gt;
+&lt;!--        subtitle = "Date: {frame_along}", caption = "Source: ourworldindata.org") + --&gt;
+&lt;!--   transition_reveal(date) --&gt;
+
+&lt;!-- # Animate --&gt;
+&lt;!-- animate(anim, --&gt;
+&lt;!--         height = 500, --&gt;
+&lt;!--         width = 800, --&gt;
+&lt;!--         nframes = 400, --&gt;
+&lt;!--         fps = 20, --&gt;
+&lt;!--         renderer = gifski_renderer(loop = TRUE)) --&gt;
+
+&lt;!-- # Save --&gt;
+&lt;!-- anim_save('widgets/gif-1.gif') --&gt;
+
+&lt;iframe src="widgets/gif-1.gif" width="800" height="500" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;
+
+
+---
+name: animate-map
+class: center, top
+
+.right[&lt;p&gt;&lt;a href="https://d4tagirl.com/2017/05/how-to-plot-animated-maps-with-gganimate"&gt;source: d4tagirl.com&lt;/a&gt;&lt;/p&gt;]
+
+&lt;iframe src="https://d4tagirl.com/post/how-to-plot-animated-maps-with-gganimate/2017-04-24-how-to-plot-animated-maps-with-gganimate/ani_map_less_frames.gif" width="900" height="600" frameBorder="0" class="giphy-embed" allowFullScreen&gt;&lt;/iframe&gt;
+
+
+
+
+---
+name: shiny-example
+class: top, left
+
+.left-column[
+
+### `R Shiny`
+
+- Interactive applications
+- dashboards
+
+]
+
+.right-column[
+&lt;iframe src="https://cbdrh.shinyapps.io/vaccinations-demo-app/" width="800" height="600" frameBorder="0" allowFullScreen&gt;&lt;/iframe&gt;
+]
+
+.right[https://cbdrh.shinyapps.io/vaccinations-demo-app/]
+
+
+
+
+
+
+---
+class: center, bottom, title-slide
+background-image: url("images/sea.jpg")
+background-size: contain
+
+.left[
+
+# Workflow
+
+]
+
+
+---
+name: plain-text
+class: center, middle, inverse
+
+.left-column[
+  ![](images/plaintext-cover-us-letter.png)
+]
+
+.right-column[
+
+# if you’re in the early phase of your career as a graduate student... you should give some thought to how you’re going to organize and manage your work
+
+.right[plain-text.co/index.html]
+
+
+]
+
+
+---
+name: software-tasks
+class: centre, inverse
+
+# Two software tasks
+
+--
+
+.pull-left[
+  ## 1. Statistical analysis
+  
+  ![](images/stata.png)
+
+]
+
+--
+
+.pull-right[
+
+## 2. Communicating results
+
+![](images/word.png)
+]
+
+---
+name: approaches
+class: centre, inverse
+
+# Two approaches
+
+--
+
+.pull-left[
+  ## Office model
+  
+1. Analyse data in Excel/Stata/whatever
+1. Cut and paste output into Word doc
+1. Write report
+
+
+]
+
+--
+
+.pull-right[
+
+## Engineering model
+
+1. Write a single text file that includes 
+    - analysis code 
+    - text of report
+1. Weave together analysis output and text
+
+]
+
+--
+&lt;br&gt;
+&lt;br&gt;
+.left[The engineering model is also referred to as _literate programming_]
+
+---
+name: benefits
+class: inverse, left, top, large-font 
+
+# Benefits of Literate Programming
+
+1. Transparent
+1. Reproducible
+1. Automated
+1. Versioned
+1. Backed up
+
+
+---
+name: rmarkdown
+class: left, top
+
+# Implementation of literate programming 
+
+.pull-left[
+
+## Rmarkdown
+
+![:scale 40%](images/hex-rmarkdown.png) 
+- Plain text
+- R code
+
+]
+
+.pull-right[
+
+## Knitr 
+
+![:scale 40%](images/hex-knitr.png)
+- "knit" the output together
+
+]
+
+---
+name: rmarkdown-example
+class: inverse, center, top
+background-image: url("images/rmarkdown-example.png")
+background-size: contain
+
+
+---
+name: knit-to-word
+class: center, top
+
+# output: word_document
+
+![:scale 60%](images/knit-to-word.png)
+---
+name: knit-to-pdf
+class: center, top
+
+# output: pdf_document
+
+![:scale 60%](images/knit-to-pdf.png)
+
+
+---
+name: rmarkdown-extensions
+class: left
+
+# Extensions to using `distill`
+
+## Blogs 
+- e.g. https://timchurches.github.io/blog/
+- https://rstudio.github.io/distill/
+
+## Webpages
+- https://pkgs.rstudio.com/distill/articles/examples.html
+
+
+---
+name: software-comparison
+class: inverse, center, middle
+background-image: url("images/software-comparison.jpg")
+background-size: contain
+
+
+
+
+
+
+
+---
+name: draw-owl
+class: left, middle
+
+## Next steps
+
+.left-column[
+
+### Today: 
+Figure 1
+
+### Next 3 years:
+Figure 2
+
+]
+
+.right-column[
+
+![:scale 60%](images/how-to-draw-an-owl.jpeg)
+]
+
+.footnote[
+The slides and links will be made available after the talk so you can follow up on the bits you are interested in.
+]
+
+---
+name: resources
+
+# Resources
+
+STAT545, Data wrangling, exploration, and analysis with R, Professor Jenny Bryan, UBC
+https://stat545.com/index.html
+
+
+The Plain Person's Guide to Plain Text Social Science, Professor Kieran Healy, Duke University
+
+Introduction to R course with UNSW StatsCentral https://www.analytical.unsw.edu.au/facilities/stats-central/online-short-courses
+
+Data visualisation with `ggplot2` cheatsheet https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf
+
+&lt;!-- Default css code --&gt;
+
+&lt;style type="text/css"&gt;
+.remark-code{line-height: 1.5; font-size: 80%}
+
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+
+code.r.hljs.remark-code{
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+code.r.hljs.remark-code:hover{
+  overflow-x:visible;
+  width: 500px;
+  border-style: solid;
+}
+
+.remark-slide-content {
+    font-size: 22px;
+    padding: 1em 4em 1em 4em;
+}
+
+.large-font {
+  font-size: 32px;
+}
+
+.chapter-slide {
+font-weight: normal;
+font-size: 60px;
+color: white;
+background-color: white; }
+
+&lt;/style&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="macros.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
