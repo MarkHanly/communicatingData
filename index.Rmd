@@ -33,6 +33,10 @@ library(ggiraph)
 library(RColorBrewer)
 library(gganimate)
 library(xaringanthemer)
+library(kableExtra)
+library(DT)
+library(sparkline)
+sparkline(0)
 
 # xaringanThemer
 style_mono_accent(base_color = "#3C989E")
@@ -42,7 +46,10 @@ xaringanExtra::use_tile_view()
 
 dailyVac <- readr::read_csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv')
 
-ctryList <- c('Israel', 'Australia', 'United Kingdom', 'Vietnam', 'India', 'China', 'Germany', 'United States', 'Turkey', 'Argentina')
+ctryList <- c('Israel', 'Australia', 'United Kingdom', 'India', 'China', 'Germany', 'United States', 'Turkey', 'Argentina')
+
+dt <- mtcars[1:5, 1:6]
+
 ```
 
 
@@ -50,28 +57,31 @@ ctryList <- c('Israel', 'Australia', 'United Kingdom', 'Vietnam', 'India', 'Chin
 
 # Introductions
 
-.pull-left[
-  ## About me
+## About me
 
-- PhD
-- CBDRH
-# `r emo::ji("Ireland")`
+### `r emo::ji("boy")` `r emo::ji("Ireland")`  `r emo::ji("forward")` `r emo::ji("student")` `r emo::ji("United_Kingdom")` `r emo::ji("forward")` `r emo::ji("professor")` `r emo::ji("Australia")`
 
-]
+- Child health and development | Joint replacements | Infectious disease
 
---
+- SPSS | Stata | SAS | R 
 
-.pull-right[
+- Not really a 'computery' person
+
+.right[`r emo::ji('email')` m.hanly@unsw.edu.au]
+
+### `r emo::ji("bike")` `r emo::ji("beers")` `r emo::ji("canoe")` `r emo::ji("books")`
+
+---
+class: centre
 
 ## About you (maybe?)
-- MSc or PhD
-- Quantitative 
-- Health-orientated
-- Coder
-  - SAS/Stata/R/Python/SPSS
-- Beginner -> Experienced
 
-]
+### `r emo::ji("student")` MSc | PhD | ECR
+### `r emo::ji("graph")` Quantitative
+### `r emo::ji("health")` Health-orientated 
+### `r emo::ji("computer")` Coder (SAS | SPSS | R | Python | Stata)
+### `r emo::ji("pencil")` Beginner | Experienced | Learner
+
 
 ---
 name: communicating-data
@@ -156,7 +166,7 @@ class: left
 ]
 
 .pull-right[
-<iframe src="https://giphy.com/embed/i45Wufh14ggPMgSvrC" width="480" height="347" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/usnationalarchives-books-reading-library-i45Wufh14ggPMgSvrC">via GIPHY</a></p>
+<iframe src="https://giphy.com/embed/1iu8uG2cjYFZS6wTxv" width="384" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/kitty-smart-1iu8uG2cjYFZS6wTxv">via GIPHY</a></p>
 ]
 
 ---
@@ -264,7 +274,7 @@ class: left, top
 .pull-left[
   ## What I plan to cover
   
-The things you might present `r emo::ji("sailboat")`
+The vessel for your communication `r emo::ji("sailboat")`
 - Graphs
 - Tables
   
@@ -294,20 +304,9 @@ background-image: url("images/sailboat.jpg")
 background-size: contain
 
 .left[
-
-# Figures and tables
-
+# Figures 
 ]
 
-
-
----
-name: figures-quote
-class: inverse, centre, middle
-
-# Figure quality is a paper’s suit and tie.
-
-.right[&mdash; American Journal Experts (AJE) Report]
 
 
 ---
@@ -820,53 +819,257 @@ dailyVac %>%
 
 
 ---
-name: flipbook-demo2
+class: left, top
 
-```{r timeVac, include = FALSE, echo = FALSE}
+.left-column[
+## A second example
+Here's a basic line plot of vaccintation rate over time for different countries
+]
 
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
 dailyVac %>% 
   filter(location %in% ctryList) %>% 
   group_by(location) %>% 
   select(location, daily_vaccinations_per_million, date) %>%
-  mutate(label = if_else(date == max(date),
-                         as.character(location), 
-                         NA_character_)) %>% #BREAK
-  ggplot() + #BREAK
-  aes(x = date) + #BREAK 
-  aes(y = daily_vaccinations_per_million) + #BREAK
-  geom_line() +
-  aes(group = location) + #BREAK
-  aes(color = location) + #BREAK
-  scale_x_date("Date") + #BREAK
-  scale_y_continuous("Total vaccinations") + #BREAK
-  scale_y_continuous("Total vaccinations (millions)", label = seq(0,80,20)) + #BREAK
-  theme(legend.position = 'none') + #BREAK
-  labs(title = "Number of Covid-19 vaccinatations administered") + #BREAK
-  labs(caption = "Source: ourworldindata.org") + #BREAK
-  geom_text_repel(aes(label = label)) + #BREAK
-  scale_y_log10()
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location)) +
+  geom_point()
 ```
-
-`r chunk_reveal("timeVac", break_type = "user")`
-
-
+]
 
 ---
-name: leaflet
-class: center, top
+class: left, top
 
-## Interactive maps with 'leaflet'
+.left-column[
+## A second example
+Let's tidy up a bit with axis labels, a title and caption
+]
 
-.right[[`r emo::ji('link')` leaflet for R](https://rstudio.github.io/leaflet/)]
-
-```{r, echo = FALSE}
-library(leaflet)
-leaflet(height=350,width=650) %>% 
-  addTiles() %>%
-  addMarkers(lat = c(-33.918172430083494, -33.905902691847984), 
-             lng = c(151.2363559015195, 151.23545757637913), popup=c("CBDRH", "NDARC")) %>%
-  setView(lat=-33.912569, lng=151.235464, zoom=14)
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
+dailyVac %>% 
+  filter(location %in% ctryList) %>% 
+  group_by(location) %>% 
+  select(location, daily_vaccinations_per_million, date) %>%
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location)) +
+  geom_point() + 
+  scale_x_date('Date') +
+  scale_y_continuous('Vaccinations per million pop', labels = scales::comma) +
+  theme(text = element_text(size = 16)) +
+  labs(title = "Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org")
 ```
+]
+
+---
+class: left, top
+
+.left-column[
+## A second example
+We can change the aesthetic properties of the dots. Like colour...
+]
+
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
+dailyVac %>% 
+  filter(location %in% ctryList) %>% 
+  group_by(location) %>% 
+  select(location, daily_vaccinations_per_million, date) %>%
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location, color = location)) +
+  geom_point() + 
+  scale_x_date('Date') +
+  scale_y_continuous('Vaccinations per million pop', labels = scales::comma) +
+  theme(text = element_text(size = 16)) +
+  labs(title = "Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org")
+```
+]
+
+---
+class: left, top
+
+.left-column[
+## A second example
+... and shape
+]
+
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
+dailyVac %>% 
+  filter(location %in% ctryList) %>% 
+  group_by(location) %>% 
+  select(location, daily_vaccinations_per_million, date) %>%
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location, shape = location)) +
+  geom_point() +
+  scale_shape_manual(values=1:length(ctryList)) +
+  scale_x_date('Date') +
+  scale_y_continuous('Vaccinations per million pop', labels = scales::comma) +
+  theme(text = element_text(size = 16)) +
+  labs(title = "Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org")
+```
+]
+
+---
+class: left, top
+
+.left-column[
+## A second example
+Or we can change the geometry from a dot to a line
+]
+
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
+dailyVac %>% 
+  filter(location %in% ctryList) %>% 
+  group_by(location) %>% 
+  select(location, daily_vaccinations_per_million, date) %>%
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location)) +
+  geom_line() +
+  scale_x_date('Date') +
+  scale_y_continuous('Vaccinations per million pop', labels = scales::comma) +
+  theme(text = element_text(size = 16)) +
+  labs(title = "Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org")
+```
+]
+
+---
+class: left, top
+
+.left-column[
+## A second example
+And change the aesthetic properties of the line. Like linetype...
+]
+
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
+dailyVac %>% 
+  filter(location %in% ctryList) %>% 
+  group_by(location) %>% 
+  select(location, daily_vaccinations_per_million, date) %>%
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location, linetype = location)) +
+  geom_line() +
+  scale_x_date('Date') +
+  scale_y_continuous('Vaccinations per million pop', labels = scales::comma) +
+  theme(text = element_text(size = 16)) +
+  labs(title = "Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org")
+```
+]
+
+---
+class: left, top
+
+.left-column[
+## A second example
+... and colour.
+]
+
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
+dailyVac %>% 
+  filter(location %in% ctryList) %>% 
+  group_by(location) %>% 
+  select(location, daily_vaccinations_per_million, date) %>%
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location, color = location)) +
+  geom_line() +
+  scale_x_date('Date') +
+  scale_y_continuous('Vaccinations per million pop', labels = scales::comma) +
+  theme(text = element_text(size = 16)) +
+  labs(title = "Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org")
+```
+]
+
+---
+class: left, top
+
+.left-column[
+## A second example
+Or we can layer multiple geoms, e.g. dots + lines
+]
+
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
+dailyVac %>% 
+  filter(location %in% ctryList) %>% 
+  group_by(location) %>% 
+  select(location, daily_vaccinations_per_million, date) %>%
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location, color = location)) +
+  geom_point(alpha = 0.2) +
+  geom_line() +
+  scale_x_date('Date') +
+  scale_y_continuous('Vaccinations per million pop', labels = scales::comma) +
+  theme(text = element_text(size = 16)) +
+  labs(title = "Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org")
+```
+]
+
+---
+class: left, top
+
+.left-column[
+## A second example
+The colors are a bit hard to distinguish so lets try labels instead
+]
+
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
+dailyVac %>% 
+  filter(location %in% ctryList) %>% 
+  group_by(location) %>% 
+  select(location, daily_vaccinations_per_million, date) %>%
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location, color = location, label = label)) +
+  geom_point(alpha = 0.2) +
+  geom_line() +
+  geom_label(nudge_x = 12) +
+  scale_x_date('Date', limits = c(as.Date('2020/12/20'), as.Date('2021/03/31'))) +
+  scale_y_continuous('Vaccinations per million pop', labels = scales::comma) +
+  theme(text = element_text(size = 16), legend.position = 'none') +
+  labs(title = "Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org")
+
+```
+]
+
+---
+class: left, top
+
+.left-column[
+## A second example
+Or we could try facetting (multi-plot graphs). Much better! `r emo::ji('happy')`
+]
+
+.right-column[
+```{r, echo = FALSE, fig.width = 12}
+dailyVac %>% 
+  filter(location %in% ctryList) %>% 
+  group_by(location) %>% 
+  select(location, daily_vaccinations_per_million, date) %>%
+  mutate(label = if_else(date == max(date),  as.character(location), NA_character_)) %>%  
+  ggplot(aes(x = date, y = daily_vaccinations_per_million, group = location, color = location, label = label)) +
+  geom_point(alpha = 0.2) +
+  geom_line(size = 1.5) +
+  scale_x_date('Date') +
+  scale_y_continuous('Vaccinations per million pop', labels = scales::comma) +
+  theme(text = element_text(size = 16), legend.position = 'none') +
+  labs(title = "Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org") +
+  facet_wrap(~location)
+```
+]
+
 
 
 ---
@@ -889,8 +1092,8 @@ ggi <- dailyVac %>%
   scale_x_date("Date") +  
   scale_y_continuous("Total vaccinations per million pop") + 
   theme(legend.position = 'none') +  
-  labs(title = "Number of Covid-19 vaccinatations administered") +  
-  labs(caption = "Source: ourworldindata.org") 
+  labs(title = "Number of Covid-19 vaccinatations administered",
+       caption = "Source: ourworldindata.org") 
 
 h <- girafe(code = print(ggi), width_svg = 8, height_svg = 5)
 htmlwidgets::saveWidget(h, "widgets/ggiraph.html")
@@ -986,20 +1189,159 @@ class: top, left
 ### `R Shiny`
 
 - Interactive applications
-- dashboards
+- Dashboards
+
+`r emo::ji('link')` https://cbdrh.shinyapps.io/vaccinations-demo-app/
 
 ]
 
 .right-column[
-<iframe src="https://cbdrh.shinyapps.io/vaccinations-demo-app/" width="800" height="600" frameBorder="0" allowFullScreen></iframe>
+<iframe src="https://cbdrh.shinyapps.io/vaccinations-demo-app/" width="800" height="500" frameBorder="0" allowFullScreen></iframe>
 ]
 
-.right[https://cbdrh.shinyapps.io/vaccinations-demo-app/]
+
+---
+name: leaflet
+class: center, top
+
+## Interactive maps with 'leaflet'
+
+.right[[`r emo::ji('link')` leaflet for R](https://rstudio.github.io/leaflet/)]
+
+```{r, echo = FALSE}
+library(leaflet)
+leaflet(height=350,width=650) %>% 
+  addTiles() %>%
+  addMarkers(lat = c(-33.918172430083494, -33.905902691847984), 
+             lng = c(151.2363559015195, 151.23545757637913), popup=c("CBDRH", "NDARC")) %>%
+  setView(lat=-33.912569, lng=151.235464, zoom=14)
+```
 
 
+---
+class: center, bottom, title-slide
+background-image: url("images/sailboat.jpg")
+background-size: contain
+
+.left[
+# Tables 
+]
 
 
+---
+## Amazing tables with `kableExtra` 
 
+.right[`r emo::ji('link')` [Source: `kableExtra` vignette](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) ]
+
+```{r}
+dt
+```
+
+---
+
+## Amazing tables with `kableExtra` 
+
+.right[`r emo::ji('link')` [Source: `kableExtra` vignette](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) ]
+
+```{r}
+
+  kbl(dt) 
+
+```
+
+---
+
+## Amazing tables with `kableExtra` 
+
+.right[`r emo::ji('link')` [Source: `kableExtra` vignette](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) ]
+
+```{r}
+
+  kbl(dt) %>%
+  kable_classic()
+
+```
+
+
+---
+
+## Amazing tables with `kableExtra` 
+
+.right[`r emo::ji('link')` [Source: `kableExtra` vignette](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) ]
+
+```{r}
+
+  kbl(dt) %>%
+  kable_minimal()
+
+```
+
+---
+
+## Fun with `sparklines` 
+
+.right[`r emo::ji('link')` [Source: `DT` vignette](https://rstudio.github.io/DT/) ]
+
+```{r, echo = FALSE}
+
+x <- dailyVac %>% 
+filter(location %in% ctryList) %>% 
+group_by(location) %>% 
+summarise(total = max(total_vaccinations, na.rm=TRUE)) 
+
+y <- dailyVac %>%
+filter(location %in% ctryList) %>% 
+select(date, location, total_vaccinations) %>% 
+pivot_wider(id_cols = date, names_from = location, values_from = total_vaccinations)
+
+
+spk_dt <- data.frame(
+  country = x$location,
+  total = x$total,
+  sparkline = c(
+    spk_chr(y$Argentina),
+    spk_chr(y$Australia),
+    spk_chr(y$China),
+    spk_chr(y$Germany),
+    spk_chr(y$India),
+    spk_chr(y$Israel),
+    spk_chr(y$Turkey),
+    spk_chr(y$`United Kingdom`),
+    spk_chr(y$`United States`)
+            )
+)
+
+
+kbl(spk_dt, escape = FALSE, 
+col.names = c("Country", "Total vaccinations", "Trend"), 
+digits = 0,
+format.args = list(big.mark = ','), 
+caption = "Vaccination rollout") %>% 
+kable_styling(full_width = FALSE, position = "left") %>%
+  column_spec(1, width = "3") %>%
+  column_spec(2, width = "3") %>% 
+  column_spec(3, width = "6")
+
+```
+
+---
+
+## Amazinger tables with `DT` 
+
+.right[`r emo::ji('link')` [Source: `DT` vignette](https://rstudio.github.io/DT/) ]
+
+```{r, echo = FALSE}
+
+dailyVac %>% 
+  group_by(location) %>% 
+  slice_max(date) %>%
+  select(location, total_vaccinations) %>% 
+  datatable(options = list(pageLength = 5, 
+                           info = FALSE, 
+                           lengthMenu = list(c(5, 10, 15), c(5,10,15))),
+            colnames = c('Country', 'Total vaccinations'))
+
+```
 
 ---
 class: center, bottom, title-slide
@@ -1013,34 +1355,17 @@ background-size: contain
 ]
 
 
----
-name: plain-text
-class: center, middle, inverse
-
-.left-column[
-  ![](images/plaintext-cover-us-letter.png)
-]
-
-.right-column[
-
-# if you’re in the early phase of your career as a graduate student... you should give some thought to how you’re going to organize and manage your work
-
-.right[plain-text.co/index.html]
-
-
-]
-
 
 ---
 name: software-tasks
-class: centre, inverse
+class: centre 
 
-# Two software tasks
+## Two software tasks
 
 --
 
 .pull-left[
-  ## 1. Statistical analysis
+  ### 1. Statistical analysis
   
   ![](images/stata.png)
 
@@ -1050,14 +1375,14 @@ class: centre, inverse
 
 .pull-right[
 
-## 2. Communicating results
+### 2. Communicating results
 
 ![](images/word.png)
 ]
 
 ---
 name: approaches
-class: centre, inverse
+class: centre
 
 # Two approaches
 
@@ -1091,24 +1416,51 @@ class: centre, inverse
 <br>
 .left[The engineering model is also referred to as _literate programming_]
 
+
+---
+name: plain-text
+class: center, middle, inverse
+
+.left-column[
+  ![](images/plaintext-cover-us-letter.png)
+]
+
+.right-column[
+
+# if you’re in the early phase of your career as a graduate student... you should give some thought to how you’re going to organize and manage your work
+
+.right[`r emo::ji('link')` plain-text.co/index.html]
+
+]
+
 ---
 name: benefits
-class: inverse, left, top, large-font 
+class: left, top, large-font 
 
-# Benefits of Literate Programming
+## Benefits of text-based literate Programming
 
+.pull-left[
 1. Transparent
 1. Reproducible
 1. Automated
 1. Versioned
 1. Backed up
+]
 
+--
+
+.pull-right[
+
+### But also because this is how your work will be read! `r emo::ji('rocket')`
+
+<iframe src="https://giphy.com/embed/3boPPdHk2ueo8" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/dog-puppy-dachshund-3boPPdHk2ueo8">via GIPHY</a></p>
+]
 
 ---
 name: rmarkdown
 class: left, top
 
-# Implementation of literate programming 
+## Implementation of literate programming 
 
 .pull-left[
 
@@ -1140,14 +1492,14 @@ background-size: contain
 name: knit-to-word
 class: center, top
 
-# output: word_document
+## output: word_document
 
 ![:scale 60%](images/knit-to-word.png)
 ---
 name: knit-to-pdf
 class: center, top
 
-# output: pdf_document
+## output: pdf_document
 
 ![:scale 60%](images/knit-to-pdf.png)
 
@@ -1156,67 +1508,99 @@ class: center, top
 name: rmarkdown-extensions
 class: left
 
-# Extensions to using `distill`
+## Disseminating online using `distill`
 
-## Blogs 
+.right[`r emo::ji('link')` [Intro to `distill`](https://rstudio.github.io/distill/)]
+
+### Blogs 
 - e.g. https://timchurches.github.io/blog/
 - https://rstudio.github.io/distill/
 
-## Webpages
+### Webpages
+- e.g. https://seedingsuccess.github.io/ `r emo::ji('seedling')`
 - https://pkgs.rstudio.com/distill/articles/examples.html
 
 
+
 ---
-name: software-comparison
-class: inverse, center, middle
-background-image: url("images/software-comparison.jpg")
+
+## GitHub as a dissemination platform
+
+.right[`r emo::ji('link')` [Happy Git with R](https://happygitwithr.com/)]
+
+
+**Git** Software to manage code version control
+
+**GitHub** A platform to facilitate collaboration 
+
+**repository** code + data + links + documentation
+
+**example** https://github.com/CBDRH/vaccinatingAustralia
+
+---
+class: center, middle, inverse
+
+## The tools to create practical, accessible and interactive tables and graphs are at our fingertips
+
+--
+
+## `r emo::ji('hand')`
+
+
+
+---
+class: center, bottom, title-slide
+background-image: url("images/how-to-draw-an-owl.jpeg")
 background-size: contain
 
 
+---
 
+## Resources
 
+### Showcases of cool stuff `r emo::ji('sunglasses')`
 
+- The R graph gallery https://www.r-graph-gallery.com/ 
+
+- The R shiny gallery https://shiny.rstudio.com/gallery/
+
+- Examples of blogs and websites created with `distill` https://pkgs.rstudio.com/distill/articles/examples.html
 
 
 ---
-name: draw-owl
-class: left, middle
 
-## Next steps
+## Resources
 
-.left-column[
+### Getting started with R
 
-### Today: 
-Figure 1
+- STAT545, Data wrangling, exploration, and analysis with R, Professor Jenny Bryan, UBC https://stat545.com/index.html
 
-### Next 3 years:
-Figure 2
+- Data wrangling with `dplyr` cheatsheet https://rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf
 
-]
+- Data visualisation with `ggplot2` cheatsheet https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf
 
-.right-column[
-
-![:scale 60%](images/how-to-draw-an-owl.jpeg)
-]
-
-.footnote[
-The slides and links will be made available after the talk so you can follow up on the bits you are interested in.
-]
 
 ---
-name: resources
 
-# Resources
+## Resources
 
-STAT545, Data wrangling, exploration, and analysis with R, Professor Jenny Bryan, UBC
-https://stat545.com/index.html
+### Workflow
 
+- The Plain Person's Guide to Plain Text Social Science, Professor Kieran Healy, Duke University plain-text.co/index.html
 
-The Plain Person's Guide to Plain Text Social Science, Professor Kieran Healy, Duke University
+- Happy Git with R, Professor Jenny Bryan, UBC https://happygitwithr.com/)
 
-Introduction to R course with UNSW StatsCentral https://www.analytical.unsw.edu.au/facilities/stats-central/online-short-courses
+---
 
-Data visualisation with `ggplot2` cheatsheet https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf
+## Resources 
+
+### Resources on your doorstep at UNSW
+
+- Introduction to R with UNSW StatsCentral https://www.analytical.unsw.edu.au/facilities/stats-central/online-short-courses
+
+- Visualisation and Communication of Health Data (HDAT9800) https://www.handbook.unsw.edu.au/postgraduate/courses/2019/HDAT9800
+
+- Hacky hour https://research.unsw.edu.au/hacky-hour
 
 <!-- Default css code -->
 
