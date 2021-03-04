@@ -38,8 +38,8 @@ library(DT)
 library(sparkline)
 sparkline(0)
 
-# xaringanThemer
-style_mono_accent(base_color = "#3C989E")
+# xaringanThemer #3C989E
+style_mono_accent(base_color = "#000033")
 
 # xaringanExtra
 xaringanExtra::use_tile_view()
@@ -257,7 +257,7 @@ knitr::include_graphics('images/old-table.png')
 
 .pull-right[
 
-`r emo::ji("link")` [A Table of the Apertures of Object-Glasses. The Philosophical Transactions of the Royal Society, Vol 1(4) June 1665](https://en.wikisource.org/wiki/Philosophical_Transactions/Volume_1/Number_4)
+`r emo::ji("link")` [Adrien Auzout, A Table of the Apertures of Object-Glasses. The Philosophical Transactions of the Royal Society, Vol 1(4) June 1665](https://en.wikisource.org/wiki/Philosophical_Transactions/Volume_1/Number_4)
 
 >he intends to give the reason and demonstration in his Diopticks, which he is now writing, and intends to finish, as soon as his Health will permit.
 
@@ -540,21 +540,25 @@ class: large-text, left, top
 ## Tips for visualisation
 
 --
+
 - Label x and y axis appropriately (including units of measurement where relevant)
 
 --
+
 - Vary aesthetic elements to aid comparison 
     - Color
     - Size 
     - Line type
 
 --
+
 - Arrange geometric elements to aid comparison 
     - Ranking 
     - Faceting (multi-panel plots)
     - Line type
 
 --
+
 - Include narrative
     - Title
     - Caption
@@ -1191,14 +1195,13 @@ class: top, left
 - Interactive applications
 - Dashboards
 
-`r emo::ji('link')` https://cbdrh.shinyapps.io/vaccinations-demo-app/
-
 ]
 
 .right-column[
 <iframe src="https://cbdrh.shinyapps.io/vaccinations-demo-app/" width="800" height="500" frameBorder="0" allowFullScreen></iframe>
 ]
 
+.footnote[`r emo::ji('link')` https://cbdrh.shinyapps.io/vaccinations-demo-app/]
 
 ---
 name: leaflet
@@ -1227,6 +1230,27 @@ background-size: contain
 # Tables 
 ]
 
+---
+## Tips for tables
+
+--
+Choose decimal places appropriately! Do you really need **53.1453**? Because **53** is easier to digest! 
+
+--
+
+Fewer lines than you think 
+
+--
+
+Horizontal shading can add comparison 
+
+--
+
+Appropriate number and title (of course) 
+
+--
+
+Tables for communication not for data sharing 
 
 ---
 ## Amazing tables with `kableExtra` 
@@ -1503,6 +1527,15 @@ class: center, top
 
 ![:scale 60%](images/knit-to-pdf.png)
 
+---
+class: center, bottom, title-slide
+background-image: url("images/harbour.jpg")
+background-size: contain
+
+.left[
+# Platforms 
+]
+
 
 ---
 name: rmarkdown-extensions
@@ -1537,21 +1570,94 @@ class: left
 
 **example** https://github.com/CBDRH/vaccinatingAustralia
 
+
 ---
-class: center, middle, inverse
+class: center, bottom, title-slide
+background-image: url("images/r_first_then.png")
+background-size: contain
 
-## The tools to create practical, accessible and interactive tables and graphs are at our fingertips
 
---
-
-## `r emo::ji('hand')`
-
+.footnote[https://github.com/allisonhorst/stats-illustrations]
 
 
 ---
 class: center, bottom, title-slide
 background-image: url("images/how-to-draw-an-owl.jpeg")
 background-size: contain
+
+
+---
+class: center, middle, inverse
+
+# Our figures and tables must be 
+
+---
+class: center, middle, inverse
+
+# Clear
+
+---
+class: center, middle, inverse
+
+# Accurate
+
+---
+class: center, middle, inverse
+
+# Scientific
+
+---
+class: center, middle, inverse
+
+# But they can also be
+
+---
+class: center, middle, inverse
+
+# Interactive
+
+---
+class: center, middle, inverse
+
+# Inter-connected
+
+---
+class: center, middle, inverse
+
+# Beautiful
+
+---
+class: center, middle, inverse
+
+# The tools are at our fingertips
+
+--
+
+# `r emo::ji('hand')`
+
+
+---
+class: left
+
+## These slides created using [`xaringan`](https://bookdown.org/yihui/rmarkdown/xaringan.html)
+
+### Access 
+
+Source code on GitHub https://github.com/MarkHanly/communicatingData
+
+Access online at http://communicatingdata.netlify.app/
+
+### Inspiration and thanks to
+
+`r emo::ji('link')` [**Alison Hill**](https://arm.rbind.io/slides/xaringan.html#1) 
+
+`r emo::ji('link')` [**Belinda Maher**](https://belinda-maher-melburn.netlify.app/) 
+
+`r emo::ji('link')` [**Emi Tanaka**](https://emitanaka.org/slides/20180919_RLadiesSydney/rladies-sydney-shiny.html) 
+
+`r emo::ji('link')` [**Jan Kirenz**](https://www.kirenz.com/slides/xaringan-demo-slides.html) 
+
+`r emo::ji('link')` [**Roy Francis**](https://nbisweden.github.io/raukrtemplate/presentation_demo.html) 
 
 
 ---
@@ -1588,7 +1694,7 @@ background-size: contain
 
 - The Plain Person's Guide to Plain Text Social Science, Professor Kieran Healy, Duke University plain-text.co/index.html
 
-- Happy Git with R, Professor Jenny Bryan, UBC https://happygitwithr.com/)
+- Happy Git with R, Professor Jenny Bryan, UBC https://happygitwithr.com/
 
 ---
 
@@ -1600,7 +1706,9 @@ background-size: contain
 
 - Visualisation and Communication of Health Data (HDAT9800) https://www.handbook.unsw.edu.au/postgraduate/courses/2019/HDAT9800
 
-- Hacky hour https://research.unsw.edu.au/hacky-hour
+- Hacky hour https://research.unsw.edu.au/hacky-hour 
+
+- R-Ladies Sydney https://rladiessydney.org/
 
 <!-- Default css code -->
 
