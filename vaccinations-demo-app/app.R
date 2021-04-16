@@ -40,7 +40,7 @@ server <- function(input, output) {
         p <- dailyVac %>% filter(location %in% input$location) %>% 
             ggplot(aes(x = date, y = daily_vaccinations_per_million, color = location)) +
             geom_line(size = input$size) +
-            scale_x_date("Date", limits = c(as.Date('2020/12/20'), as.Date('2021/03/01'))) +  
+            scale_x_date("Date", limits = c(as.Date('2020/12/20'), NA)) +  
             scale_y_continuous("Total vaccinations per million pop") + 
             scale_color_discrete(name = 'Country') +
             labs(title = "Number of Covid-19 vaccinatations administered") +  

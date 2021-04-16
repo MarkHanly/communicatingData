@@ -1,9 +1,9 @@
 ---
 title: "Communicating Data"
-subtitle: "_NDARC HDR learning & development webinar_"
+subtitle: "_CBDRH HDR Seminar_"
 author: "<br><br> Mark Hanly"
 institute: "Centre for Big Data Research in Health"
-date: "4 March 2021"
+date: "16 April 2021"
 output:
   xaringan::moon_reader:
     lib_dir: libs
